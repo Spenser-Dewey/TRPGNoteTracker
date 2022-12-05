@@ -1,0 +1,31 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load link_notes %}
+{% load static %}
+
+{% block scripts %} 
+    <link rel="stylesheet" href="{% static 'css/popup_style.css' %}">
+    {{ country_map|json_script:"map-data" }}
+    {{ country_name|json_script:"country" }}
+    <script src="{% static 'js/map_generator.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" onclick="history.back()">Go Back</a>
+    </div>
+    <h1 id="title"> {{ country_name }} </h1>
+    <object id="map" type="image/svg+xml" data="{{ map_url }}"></object>
+
+    <div class="notes info-notes">
+        {% for note in notes %}
+            <div class="note">
+                <p> {{ note|link|safe }} </p>
+                <form class="delete" action="{% url 'remove-note' %}" method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" value="{{note.note_id}}" name="note_id">
+                    <input type="submit" value="x">
+                </form>
+            </div>
+        {% endfor %} 
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="fantasyMap" width="1536" height="754" background-color="#000000">
+  <defs>
+    <symbol id="relief-hill-1" viewBox="0 0 100 100">
+      <path d="m20,55 q30,-28 60,0" fill="#999999" stroke="#5c5c70"/>
+      <path d="m38,55 q13,-24 40,0" fill="#fff"/>
+      <path d="m20,58 h70 m-62,3 h50" stroke="#5c5c70" stroke-dasharray="7, 11" stroke-width="1"/>
+    </symbol>
+  </defs>
+  <g id="circles">
+    <circle cx='150' cy='150' r='150' fill='red'></circle>
+    <circle cx='50' cy='50' r='100' fill='blue'></circle>
+    <circle cx='200' cy='200' r='50' fill='green'></circle>
+  </g>
+</svg>

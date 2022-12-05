@@ -1,0 +1,12 @@
+{% extends 'campaign_info/site_template.html' %}
+
+{% block title %} Campaigns {% endblock %}
+
+{% block content %}
+    <h1> Active Campaigns: </h1>
+    <ul class="campaign-links">
+    {% for campaign in my_campaigns %}
+        <li><a class="campaign-link" href="{% url 'campaign-view' campaign.campaign_id %}"> {{campaign.name}}; on World {{campaign.world.name}}</a></li>
+    {% endfor %}
+    </ul>
+{% endblock %}

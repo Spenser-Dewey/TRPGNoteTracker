@@ -1,0 +1,38 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load link_notes %}
+{% load static %}
+
+{% block title %} {{ npc.name }} {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/note_add.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" href="{% url 'index' %}">Go Back</a>
+    </div>
+    <h1> {{ npc.title }} {{ npc.name }} </h1>
+    <p> {{ npc.description_text }}<br>They hail from {{ npc.city }} </p>
+    <div class="edit">
+        <a href="{% url 'update-npc' npc.npc_id %}">Edit NPC<span></span></a>
+    </div>
+    <div class="notes info-notes">
+        {% for note in notes %}
+            <div class="note">
+                <p> {{ note|link|safe }} </p>
+                <form class="delete" action="{% url 'remove-note' %}" method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" value="{{note.note_id}}" name="note_id">
+                    <input type="submit" value="x">
+                </form>
+            </div>
+        {% endfor %} 
+    </div>
+    <form class="delete-character" action="{% url 'remove-npc' %}" method='post'>
+        {% csrf_token %}
+        <input type="hidden" value="{{npc.npc_id}}" name="npc_id">
+        <input type="submit" value="Delete {{ npc.name }} Permanently">
+        <span></span>
+    </form>
+{% endblock %}

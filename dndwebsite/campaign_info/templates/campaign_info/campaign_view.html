@@ -1,0 +1,58 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load static %}
+{% load link_notes %}
+
+{% block title %} {{ campaign.name }} view {% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/note_add.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" id="all-campaigns" tabindex="0" onclick="window.location.href='{% url 'index' %}'">All Campaigns</a>
+        <a class="box-button character" tabindex="0" id="character">My Character</a>
+    </div>
+    <h1 class="campaign_title"> {{campaign.name}} </h1>
+    <div class="sidebar-container">
+        <div class="sidebar sidebar-left" id="npc-sidebar">
+            <h2> NPC List <a href="{% url 'add-npc' %}">+</a></h2>
+            <ul>
+                {% for npc in campaign.npc_set.all %}
+                    <li> <a href="{% url 'npc-view' npc.npc_id %}">{{ npc.name }} </a> </li> 
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="sidebar sidebar-right" id="world-sidebar">
+            <h2> <a href="{% url 'world-map' campaign.world_id%}"> {{ campaign.world.name }} </a> </h2>
+            <ul>
+                {% for country in country_list %}
+                    <li> <a href="{% url 'country-map' campaign.world_id country.country_id %}"> {{ country }} </a> </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="notes" id="notes">
+        <form class="note add-note-form hidden" id="add-note-form" 
+                action="{% url 'add-note' %}" method='post'>
+            <textarea name="note-input" id="note-input" form="add-note-form"></textarea>
+            <input name="campaign_id" type="hidden" value="{{ campaign.campaign_id }}">
+            <input type="submit" value="Add">
+            {% csrf_token %}
+        </form>
+        <button class="note" onclick="addNote()" id="note-button">
+            <p> Add Note... </p>
+        </button>
+        {% for note in notes %}
+            <div class="note">
+                <p> {{ note|link|safe }} </p>
+                <form class="delete" action="{% url 'remove-note' %}" method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" value="{{note.note_id}}" name="note_id">
+                    <input type="submit" value="x">
+                </form>
+            </div>
+        {% endfor %} 
+    </div>
+{% endblock %}

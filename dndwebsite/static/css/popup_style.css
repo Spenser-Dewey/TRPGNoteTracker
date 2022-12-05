@@ -1,0 +1,26 @@
+#swappable_popup_text, .popup_header, .popup_separator {
+    fill: var(--main-fg-color);
+}
+
+.popup_separator {
+    stroke: var(--main-fg-color);
+    stroke-width: 2;
+}
+
+.popup {
+    fill: var(--main-bg-color);
+    width: 300;
+    height: 200;
+}
+
+.popup_info_btn {
+    fill: var(--main-fg-color);
+}
+
+#country_more_info_btn:hover * {
+    cursor: pointer;
+}
+
+#country_more_info_btn:hover rect {
+    fill: #D0F0E0;
+}

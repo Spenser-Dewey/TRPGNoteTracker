@@ -1,0 +1,37 @@
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 5% 20%;
+    border: 3px var(--main-fg-color) solid;
+}
+
+form .field {
+    border: 3px var(--main-fg-color) solid;
+    border-style: dotted none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+form .field:first-child {
+    border-style: none none dotted none;
+    margin-top: 0;
+}
+
+form .field:last-child {
+    border-style: dotted none none none;
+}
+
+form .field * {
+    width: 40%;
+}
+
+form .field input, form .field textarea, form .field select, form input {
+    color: var(--main-bg-color);
+    background-color: var(--main-fg-color);
+}
+
+form input[type="submit"]:hover {
+    opacity: .8;
+}

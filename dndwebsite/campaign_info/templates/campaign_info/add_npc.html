@@ -1,0 +1,31 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load static %}
+
+{% block title %} Add/Edit NPC {% endblock %}
+
+{% block scripts %} 
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" onclick="history.back()">Go Back</a>
+    </div>
+    <h1> Add/Edit an NPC </h1>
+
+    {% if npc_id %}
+        <form method="POST" action="{% url 'update-npc' npc_id %}">
+        {% else %} 
+        <form method="POST" action="{% url 'add-npc'%}">
+        {% endif %}
+
+        {% for field in form %}
+            <div class="field">
+                {{ field.span }}
+                {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+        <input type="submit" value="OK">
+        {% csrf_token%}
+    </form>
+{% endblock %}
