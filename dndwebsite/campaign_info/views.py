@@ -84,8 +84,6 @@ def addNPC(request, npc_id=None):
     
     if request.method == 'POST':
         formData = NPCForm(request.POST, request.FILES)
-        print(formData)
-        print(request.POST)
         if(formData.is_valid()):
             npc = formData.save(commit=False)
             if npc_id:
