@@ -9,6 +9,26 @@ body {
     color: var(--main-fg-color);
 }
 
+.footer {
+    position: absolute;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    margin: 0;
+    padding: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.footer * {
+    display: inline;
+    margin: 0.125em;
+    padding: 0.25em;
+}
+
 .campaign-links {
     text-align: center;
     margin-top: 2rem;

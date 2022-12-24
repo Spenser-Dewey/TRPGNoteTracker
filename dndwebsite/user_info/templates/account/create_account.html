@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% autoescape on %}
+            <title> Create Account </title>
+            <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+            <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+            <link rel="stylesheet" href="{% static 'css/links.css' %}">
+        {% endautoescape %}
+    </head>
+
+    <body>
+        <div class="content">
+        {% autoescape on %}
+            <h1> Create Account </h1>
+            {% if errors %}
+                <div>
+                    //TODO: This is a placeholder for legitimate error handling
+                    <br/>
+                    An error occured! Try again
+                </div>
+            {% endif %}
+            <form method="POST" action="{% url 'create_account' %}">
+                {% for field in new_user_form %}
+                    <div class="field">
+                        {{ field.span }}
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endfor %}
+                <input type="submit" value="OK">
+              {% csrf_token%}
+            </form>
+        {% endautoescape %}
+        </div>
+        <div class="footer">
+            <a class="link-bubble" href="{% url 'login' %}">Go To Login Instead</a>
+        </div>
+    </body>
+</html>

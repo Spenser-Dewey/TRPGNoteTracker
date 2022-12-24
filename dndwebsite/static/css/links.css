@@ -1,0 +1,17 @@
+.link-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-bubble {
+  padding: 1em;
+  margin: 0.25em;
+  background-color: var(--main-fg-color);
+  color: var(--main-bg-color);
+  transition: 100ms;
+}
+
+.link-bubble:hover {
+  color: var(--sidebar-fg-color);
+  padding: 1.25em;
+}

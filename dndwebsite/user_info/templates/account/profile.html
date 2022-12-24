@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% autoescape on %}
+            <title> Account Information </title>
+            <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+            <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+            <link rel="stylesheet" href="{% static 'css/links.css' %}">
+        {% endautoescape %}
+    </head>
+
+    <body>
+        <div class="content">
+        {% autoescape on %}
+          <h1> Hello {{ request.user.username }}! </h1>
+        {% endautoescape %}
+        
+          <div class="link-container">
+            <a href="{% url 'login' %}" class="link-bubble">
+              View My Campaigns
+            </a>
+            <a href="{% url 'login' %}" class="link-bubble">
+              Sign up for a Campaign
+            </a>
+            <a href="{% url 'login' %}" class="link-bubble">
+              DM a new Campaign
+            </a>
+          </div>
+          <form class="footer" method="POST" action="{% url 'logout' %}">
+            <input type="submit" value="Logout">
+            {% csrf_token%}
+          </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% autoescape on %}
+            <title> Login </title>
+            <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+            <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+            <link rel="stylesheet" href="{% static 'css/links.css' %}">
+        {% endautoescape %}
+    </head>
+
+    <body>
+        <div class="content">
+        {% autoescape on %}
+            <h1> Login </h1>
+            {% if errors %}
+                <div class="error">
+                    Incorrect username or password! Try again
+                </div>
+            {% endif %}
+            <form method="POST" action="{% url 'login' %}">
+
+              {% for field in form %}
+                  <div class="field">
+                      {{ field.span }}
+                      {{ field.label_tag }} {{ field }}
+                  </div>
+              {% endfor %}
+              <input type="submit" value="Login">
+              {% csrf_token%}
+            </form>
+        {% endautoescape %}
+        </div>
+
+        <div class="footer">
+            <a class="link-bubble" href="{% url 'create_account' %}">Go To Signup Instead</a>
+        </div>
+    </body>
+</html>

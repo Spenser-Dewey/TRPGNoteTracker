@@ -32,6 +32,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 INSTALLED_APPS = [
     'campaign_info.apps.campaign_info',
+    'user_info.apps.user_info',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,6 +89,9 @@ DATABASES = {
 # In seconds, how long a persistent DB connection can be open
 CONN_MAX_AGE = 50
 
+
+# User model
+AUTH_USER_MODEL = 'user_info.Player'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
