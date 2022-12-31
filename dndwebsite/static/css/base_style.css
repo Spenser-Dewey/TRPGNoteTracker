@@ -2,6 +2,8 @@
     --main-bg-color: #000400;
     --main-fg-color: #97B3B0;
     --sidebar-fg-color: #FFFFFF;
+    --secondary-dark-color: #0C1446;
+    --secondary-light-color: #175873;
 }
 
 body {
@@ -77,6 +79,22 @@ h1 {
     text-decoration: none;
 }
 
+.round-button {
+    width: 20%;
+    font-size: 1.5em;
+    background-color: var(--main-fg-color);
+    color: var(--main-bg-color);
+    padding: 1.0em 0em;
+    border-radius: 2em;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+}
+
+.round-button:hover {
+    opacity: 80%;
+}
+
 .character {
     border-radius: .5rem 0rem 0rem .5rem;
     right: -.3rem;
@@ -136,12 +154,12 @@ li {
 
 .sidebar-left {
     left: 0%;
-    background-color: #0C1446;
+    background-color: var(--secondary-dark-color);
 }
 
 .sidebar-right {
     right: 0%;
-    background-color: #175873;
+    background-color: var(--secondary-light-color);
 }
 
 #world-sidebar {

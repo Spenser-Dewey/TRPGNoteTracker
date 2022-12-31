@@ -1,0 +1,73 @@
+.danger {
+  background-color: #B55;
+  color: var(--main-fg-color);
+}
+
+.danger:hover {
+  background-color: red;
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #BB555580;
+  color: var(--main-fg-color);
+  z-index: 9999999;
+}
+
+.popup > form {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.popup > div {
+  position: relative;
+  top: 0;
+  left: 0;
+  padding: 3em;
+  background-color: black;
+  color: var(--main-fg-color);
+  width: 50%;
+  height: 50%;
+  margin: 8.5% auto;
+  border-radius: 2rem;
+}
+
+.button-row {
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.button-row .danger-option, .button-row .safe-option {
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.popup .danger-option {
+    background-color: red;
+    color: white;
+}
+
+.popup .danger-option:hover {
+  opacity: 80%;
+}
+
+.popup .safe-option {
+  background-color: var(--secondary-light-color);
+  color: white;
+}
+
+.popup .safe-option:hover {
+  opacity: 80%;
+}

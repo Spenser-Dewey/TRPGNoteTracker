@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.fields import AutoField
-from django.forms import widgets
+from django.forms import FileField, widgets
 from django.forms.models import ModelForm
 from django.utils import timezone
 from django.utils.translation import gettext_lazy
@@ -50,6 +50,20 @@ class NPC(models.Model):
 
     def __str__(self):
         return self.title + " " + self.name + " of " + self.city.__str__()
+
+class WorldForm(ModelForm):
+    class Meta:
+        model = World
+        fields = ['name']
+    world_map = FileField()
+
+class CampaignForm(ModelForm):
+    class Meta:
+        model = Campaign
+        fields = ['name', 'world']
+        labels = {
+            'name': gettext_lazy('Name of your New Campaign')
+        }
 
 class NPCForm(ModelForm):
     class Meta:
