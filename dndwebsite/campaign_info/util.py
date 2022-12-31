@@ -8,6 +8,6 @@ def replaceAllWithUrl(str, wordList, urlType):
         passing world[1] as a paramter """
     linkedText = str
     for word in wordList:
-        searchTerm = re.compile('\W' + re.escape(word[0]) + '\W', re.IGNORECASE)
+        searchTerm = re.compile('\\b' + re.escape(word[0]) + '\\b', re.IGNORECASE)
         linkedText = re.sub(searchTerm, "<a href='" + reverse(urlType, args=word[1:]) + "'>\g<0> </a>", linkedText)
     return linkedText
