@@ -2,7 +2,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.http.response import Http404
 from django.shortcuts import redirect, get_object_or_404, render
-from .models import Campaign, NPC, NPCForm, World, Note, Country
+from .models import Campaign, CampaignForm, NPC, NPCForm, World, WorldForm, Note, Country
 from django.forms.models import model_to_dict
 from django.views.decorators.clickjacking import xframe_options_exempt
 import re
@@ -59,7 +59,7 @@ def removeNote(request):
     if request.method == 'POST':
         note = Note.objects.get(pk=request.POST["note_id"])
         note.delete()
-        return redirect("campaign-view", 1) 
+        return redirect("campaign-view", request.POST["campaign_id"]) 
     else:
         return redirect("index")
 
@@ -83,7 +83,7 @@ def addNPC(request, npc_id=None):
         initial = {}
     
     if request.method == 'POST':
-        formData = NPCForm(request.POST, request.FILES)
+        formData = NPCForm(request.POST)
         if(formData.is_valid()):
             npc = formData.save(commit=False)
             if npc_id:
@@ -94,3 +94,31 @@ def addNPC(request, npc_id=None):
         else:
             print("INVALID FORM")
     return render(request, 'campaign_info/add_npc.html', {'form': NPCForm(initial=initial, instance=npc), 'npc_id': npc_id})
+
+def createWorld(request):
+    error = ''
+    if request.method == 'POST':
+        formData = WorldForm(request.POST, request.FILES)
+        if formData.is_valid():
+            # Handle uploaded file in request.FILES
+            formData.save(commit=True)
+            return redirect('create-campaign')
+    return render(request, 'campaign_info/create_world.html', {'form': WorldForm(), 'error': error})
+
+def createCampaign(request):
+    if request.method == 'POST':
+        formData = CampaignForm(request.POST)
+        if(formData.is_valid()):
+            campaign = formData.save(commit=True)
+            return redirect('campaign-view', campaign.campaign_id)
+        else:
+            print("INVALID FORM")
+    return render(request, 'campaign_info/create_campaign.html', {'form': CampaignForm()})
+
+def deleteCampaign(request):
+    if request.method == 'POST':
+        campaign = Campaign.objects.get(pk=request.POST["campaign_id"])
+        campaign.delete()
+        return redirect("account") 
+    else:
+        return redirect('campaign-view', request.POST["campaign_id"])

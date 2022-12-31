@@ -1,0 +1,38 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load static %}
+
+{% block title %} New Campaign {% endblock %}
+
+{% block scripts %} 
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/links.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" onclick="history.back()">Go Back</a>
+    </div>
+    <h1> DM a New Campaign </h1>
+
+    <p> Creating a new Campaign sets you as the owner and DM of the world;
+      you can choose to set your Campaign in an existing World or create a
+      new world.
+    </p>
+
+    <form method="POST" action="{% url 'create-campaign'%}">
+
+      {% for field in form %}
+          <div class="field">
+              {{ field.span }}
+              {{ field.label_tag }} {{ field }}
+          </div>
+      {% endfor %}
+      <input type="submit" value="OK">
+      {% csrf_token%}
+    </form>
+
+    <div class="footer">
+      <a class="link-bubble" href="{% url 'create-world' %}">Create New World First</a>
+    </div>
+
+{% endblock %}

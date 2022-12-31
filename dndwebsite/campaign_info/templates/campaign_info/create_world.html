@@ -1,0 +1,34 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load static %}
+
+{% block title %} New World {% endblock %}
+
+{% block scripts %} 
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" onclick="history.back()">Go Back</a>
+    </div>
+    <h1> DM a New Campaign </h1>
+
+    <p> Create a new World that can be shared across campaigns. </p>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'create-world'%}">
+
+      {% for field in form %}
+          <div class="field">
+              {{ field.span }}
+              {{ field.label_tag }} {{ field }}
+          </div>
+      {% endfor %}
+      <input type="submit" value="OK">
+      {% csrf_token%}
+    </form>
+    <p> Maps uploaded need to be in a very specific format.
+        <a href="https://azgaar.github.io/Fantasy-Map-Generator/"> Azgaar's Fantasy Map generator</a> 
+        style SVG maps work for this.
+    </p>
+
+{% endblock %}
