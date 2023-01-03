@@ -17,9 +17,11 @@ def loginView(request):
     login_form = AuthenticationForm(data=request.POST)
     if login_form.is_valid():
       login(request, login_form.get_user())
-      return redirect('account')
+      next = request.POST['next']
+      return redirect(next)
     errors = True
-  return render(request, 'account/login.html', { 'form': AuthenticationForm(), 'errors': errors})
+  next = request.GET['next'] if 'next' in request.GET else 'account'
+  return render(request, 'account/login.html', { 'form': AuthenticationForm(), 'next': next, 'errors': errors})
 
 def createAccountView(request):
   if request.user.is_authenticated:

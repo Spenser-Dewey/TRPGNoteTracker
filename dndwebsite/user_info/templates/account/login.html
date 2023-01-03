@@ -28,6 +28,7 @@
                       {{ field.label_tag }} {{ field }}
                   </div>
               {% endfor %}
+              <input type="hidden" name="next" value="{{next}}">
               <input type="submit" value="Login">
               {% csrf_token%}
             </form>
