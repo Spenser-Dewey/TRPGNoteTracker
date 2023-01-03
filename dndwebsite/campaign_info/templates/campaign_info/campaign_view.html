@@ -6,24 +6,10 @@
 
 {% block scripts %}
     <script src="{% static 'js/note_add.js' %}"></script>
-    <script src="{% static 'js/popup_manager.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/danger_popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/links.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="popup hidden" id="deleteCampaign">
-        <div>
-            <h2> Are you sure you want to delete campaign "{{campaign.name}}"? This is irreversible. </h2>
-            <div class="button-row">
-                <button class="safe-option" onclick="hidePopup('deleteCampaign')">No Nevermind It's Fine</button>
-                <form action="{% url 'delete-campaign' %}" method='post'>
-                    {% csrf_token %}
-                    <input type="hidden" value="{{campaign.campaign_id}}" name="campaign_id">
-                    <input class="danger-option" type="submit" value="YEAH DELETE">
-                </form>
-            </div>
-        </div>
-    </div>
     <div class="top-buttons">
         <a class="box-button back" id="all-campaigns" tabindex="0" onclick="window.location.href='{% url 'index' %}'">All Campaigns</a>
         <a class="box-button character" tabindex="0" id="character">My Character</a>
@@ -71,7 +57,7 @@
             </div>
         {% endfor %} 
         <div class="footer">
-            <button class="danger" onclick="showPopup('deleteCampaign')"> Delete Campaign </button>
+            <a class="link-bubble" href="{% url 'manage-campaign' campaign.campaign_id %}"> Manage Campaign </a>
         </div>
     </div>
 {% endblock %}

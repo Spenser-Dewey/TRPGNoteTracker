@@ -1,0 +1,61 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load static %}
+
+{% block title %} Manage Campaign {% endblock %}
+
+{% block scripts %} 
+    <script src="{% static 'js/popup_manager.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/danger_popup.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" href="{% url 'campaign-view' campaign.campaign_id %}">Go Back</a>
+    </div>
+    <div class="popup hidden" id="deleteCampaign">
+        <div>
+            <h2> Are you sure you want to delete campaign "{{campaign.name}}"? This is irreversible. </h2>
+            <div class="button-row">
+                <button class="safe-option" onclick="hidePopup('deleteCampaign')">No Nevermind It's Fine</button>
+                <form action="{% url 'delete-campaign' %}" method='post'>
+                    {% csrf_token %}
+                    <input type="hidden" value="{{campaign.campaign_id}}" name="campaign_id">
+                    <input class="danger-option" type="submit" value="YEAH DELETE">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <h1> Manage Campaign '{{campaign.name}}' </h1>
+    {% if campaign.join_code != "" %}
+        <h3> Campaign Join Code: <b>{{campaign.join_code}}</b> </h3>
+        <form method="post" action="{% url 'open-campaign' campaign.campaign_id False %}">
+            {% csrf_token %}
+            <input type="submit" class="round-button" style="font-size: 0.75rem; padding: 0.125rem;" value="Close Campaign To New Players" />
+        </form>
+    {% else %}
+        <form method="post" action="{% url 'open-campaign' campaign.campaign_id True %}">
+            {% csrf_token %}
+            <input type="submit" class="round-button" style="font-size: 0.75rem; padding: 0.125rem;" value="Open Campaign To New Players" />
+        </form>
+    {% endif %}
+    <div style="text-align: left">
+        <h3> Campaign DMs: </h3>
+        <ul>
+            {% for dm in dms %}
+                <li> {{dm.username}} ({{dm.first_name}} {{dm.last_name}}) </li>
+            {% endfor %}
+        </ul>
+        <h3> Campaign Players: </h3>
+        <ul>
+          {% for player in players %}
+            <li> {{player.username}} ({{player.first_name}} {{player.last_name}}) </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button class="danger" onclick="showPopup('deleteCampaign')"> Delete Campaign </button>
+    </div>
+{% endblock %}

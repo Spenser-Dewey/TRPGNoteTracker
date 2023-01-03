@@ -3,6 +3,10 @@
 {% block title %} Campaigns {% endblock %}
 
 {% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" href="{% url 'account' %}">Account</a>
+    </div>
+
     <h1> Active Campaigns: </h1>
     <ul class="campaign-links">
     {% for campaign in my_campaigns %}

@@ -1,0 +1,30 @@
+{% extends 'campaign_info/site_template.html' %}
+{% load static %}
+
+{% block title %} Join Campaign {% endblock %}
+
+{% block scripts %} 
+    <link rel="stylesheet" href="{% static 'css/form_style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="top-buttons">
+        <a class="box-button back" href="{% url 'account' %}">Account</a>
+    </div>
+    <h1> Join an open Campaign </h1>
+
+    <p> Create a new World that can be shared across campaigns. </p>
+
+    <form method="POST" enctype="multipart/form-data" action="{% url 'join-campaign'%}">
+      <div class="field">
+        <label for="id_join_code">Join Code:</label>
+        <input minlength="6" maxlength="6" name="join_code" id="join_code" type="text"/>
+      </div>
+      <input type="submit" value="OK"/>
+      {% csrf_token%}
+    </form>
+    {% if errors != "" %}
+      <p style="color: red;"> {{errors}} </p>
+    {% endif %}
+
+{% endblock %}

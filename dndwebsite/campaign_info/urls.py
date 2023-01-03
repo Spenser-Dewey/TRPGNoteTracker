@@ -4,9 +4,12 @@ from . import views
 
 urlpatterns = [
     path('campaign-view/', views.indexView, name='view-campaigns'),
+    path('campaign-view/signup/', views.joinCampaign, name='join-campaign'),
     path('campaign-view/create/', views.createCampaign, name='create-campaign'),
     path('campaign-view/delete/', views.deleteCampaign, name='delete-campaign'),
     path('campaign-view/<int:campaign_id>/', views.campaignView, name='campaign-view'),
+    path('campaign-view/manage/<int:campaign_id>/', views.manageCampaignView, name='manage-campaign'),
+    path('campaign-view/open/<int:campaign_id>/<str:open>', views.openCampaignView, name='open-campaign'),
     path('campaign-view/add-note/', views.addNotePost, name='add-note'),
     path('campaign-view/remove-note/', views.removeNote, name='remove-note'),
     path('campaign-view/remove-npc/', views.removeNPC, name='remove-npc'),

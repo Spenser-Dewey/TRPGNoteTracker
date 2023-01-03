@@ -5,6 +5,8 @@ from django.forms.models import ModelForm
 from django.utils import timezone
 from django.utils.translation import gettext_lazy
 
+from user_info.models import Player
+
 # World/Universe that campaigns take place in
 class World(models.Model):
     world_id = models.AutoField(primary_key=True)
@@ -17,9 +19,15 @@ class Campaign(models.Model):
     campaign_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
     world = models.ForeignKey(World, on_delete=models.PROTECT)
+    join_code = models.CharField(max_length=6, unique=True, default="")
 
     def __str__(self):
         return self.name
+
+class CampaignRole(models.Model):
+    campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    player = models.ForeignKey(Player, on_delete=models.CASCADE)
+    is_dm = models.BooleanField()
 
 # A Country on a World
 class Country(models.Model):
