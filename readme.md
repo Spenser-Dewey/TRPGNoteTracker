@@ -6,15 +6,13 @@
 So we want support for a few extra things here, and adjust some existing features to make this easier to use.
 
 ### Known bugs
-  * Linking notes doesn't work on first/last word
   * Deleting NPC button appears broken
+  * The delete note 'on hover' visual is a little off
 
 ### Desired adjustments:
   * Ability to edit notes
   * Display NPC sidebar in the NPC add/edit views
-  * Fix the back button to actually navigate back
-  * Replace the (stub) character sheet button with naviagation back to main campaign view
-  * Add searching to 
+  * Add searching to main screen
 
 ### New Features (ordered by size desc)
   1) Model additions
@@ -29,9 +27,7 @@ So we want support for a few extra things here, and adjust some existing feature
       3) Related to Model points 1-2, create a new view specifically to view organizations/families
       4) Related to Model point 3, create a new view specifically to view Events, or add filtering to main notes view
   3) General additions
-     1) Importance field in NPC lists, so I can sort NPCs
-     2) Add user sessions
-        1) Includes log-in screen
-        2) Give access to some campaigns for some users, each campaign has a ~DM~ role
-        3) Associate notes with users  
-     3) Calendar!
+     1) Add user sessions
+        1) Associate notes with users  
+     2) Importance field in NPC lists, so I can sort NPCs
+     3) Calendar for scheduling sessions
